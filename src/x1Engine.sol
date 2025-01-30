@@ -106,6 +106,7 @@ contract x1Engine is ReentrancyGuard {
     // Team & Advisors Minting
     function mintTeamTokens(address to, uint256 amount)
         external
+        onlyOwner
         moreThanZero(amount)
         nonReentrant
     {
@@ -123,6 +124,7 @@ contract x1Engine is ReentrancyGuard {
     // Community Development Minting
     function mintCommunityTokens(address to, uint256 amount)
         external
+        onlyOwner
         moreThanZero(amount)
         nonReentrant
     {

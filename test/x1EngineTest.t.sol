@@ -63,6 +63,16 @@ contract x1EngineTest is Test {
     x1e.mintCommunityTokens(USER, excessiveAmount);
     }
 
+     function testOnlyOwnerCanMintTeamAndCommunityTokens() public {
+        vm.prank(USER);
+        vm.expectRevert(x1Engine.x1Engine__NotAuthorized.selector);
+        x1e.mintTeamTokens(USER, 1000 ether);
+        
+        vm.prank(USER);
+        vm.expectRevert(x1Engine.x1Engine__NotAuthorized.selector);
+        x1e.mintCommunityTokens(USER, 1000 ether);
+    }
+
     function testTeamCannotMintBeforeLockPeriod() public {
     uint256 unlockTime = x1e.teamUnlockTime(); // Read the lock time from contract
     assertGt(unlockTime, block.timestamp);
